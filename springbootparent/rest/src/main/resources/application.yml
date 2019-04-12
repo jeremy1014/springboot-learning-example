@@ -1,0 +1,12 @@
+server:
+  port: 9001
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://172.16.106.41:9000/eureka/
+spring:
+  application:
+    name: service-rest1

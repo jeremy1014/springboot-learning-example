@@ -1,0 +1,21 @@
+server:
+  port: 8769
+spring:
+  application:
+    name: service-zuul
+zuul:
+  routes:
+    #    api-a:
+    #      path: /simplereoute/**
+    #      url: http://www.baidu.com
+    api-b:
+      path: /rib/**
+      serviceId: SERVICE-REST1
+    api-c:
+      path: /fwd/**
+      url: forward:/sayHi
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://172.16.106.41:9000/eureka/
