@@ -16,6 +16,10 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <eureka-server.ip>127.0.0.1</eureka-server.ip>
+        <eureka-server.port>8900</eureka-server.port>
+        <admin-server.ip>127.0.0.1</admin-server.ip>
+        <admin-server.port>8901</admin-server.port>
     </properties>
     <dependencyManagement>
         <dependencies>

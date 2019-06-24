@@ -1,21 +1,48 @@
-server:
-  port: 8769
 spring:
   application:
-    name: service-zuul
+    name: gateway-zuul
+  redis:
+    host: localhost
+    port: 6379
+    password: 123321
+server:
+  port: 8910
 zuul:
   routes:
     #    api-a:
     #      path: /simplereoute/**
     #      url: http://www.baidu.com
-    api-b:
-      path: /rib/**
-      serviceId: SERVICE-REST1
-    api-c:
-      path: /fwd/**
-      url: forward:/sayHi
+    #    orderservice:
+    #      path: /orderservice/**
+    #      serviceId:  order-service
+    order-service: /orderservice/**
+
+  ratelimit:
+    enabled: true
+    default-policy-list: #optional - will apply unless specific policy exists
+      - limit: 10 #optional - request number limit per refresh interval window
+        quota: 1000 #optional - request time limit per refresh interval window (in seconds)
+        refresh-interval: 60 #default value (in seconds)
+    policy-list:
+      orderservice:
+        - limit: 2 #optional - request number limit per refresh interval window
+          quota: 1000 #optional - request time limit per refresh interval window (in seconds)
+          refresh-interval: 60 #default value (in seconds)
+          type: #optional
+            - URL=/order/
+
+    #      - type:
+    #          URL=/order/ping
+    #          - URL=/order/ping
+    #          - user
+    #          - origin
+    #          - httpmethod
+    #     - type:
+    #          - url=/all
+    repository: redis
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://172.16.106.41:9000/eureka/
+      defaultZone: http://@eureka-server.ip@:@eureka-server.port@/eureka/
+

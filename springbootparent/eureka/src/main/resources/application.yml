@@ -1,8 +1,8 @@
 server:
-  port: 9000
+  port: @eureka-server.port@
 eureka:
   instance:
-    hostname: localhost
+    hostname: @eureka-server.ip@
     prefer-ip-address: true
   client:
     registerWithEureka: false

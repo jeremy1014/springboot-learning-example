@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: gateway-cloudGateway
+server:
+  port: 8920
+  cloud:
+    gateway:
+      routes:
+        - id: host_route
+          uri: lb://order-service
+          predicates:
+            - Path=/order-service/**
+          filters:
+            - StripPrefix=1 #切割请求，去除/order-service/
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://@eureka-server.ip@:@eureka-server.port@/eureka/
+
