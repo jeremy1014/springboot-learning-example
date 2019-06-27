@@ -1,6 +1,14 @@
 spring:
   application:
     name: product-service
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://@zipkin-server.ip@:@zipkin-server.port@
 server:
   port: 9001
 eureka:
